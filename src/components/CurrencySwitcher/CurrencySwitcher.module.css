@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.sign {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.arrow {
+  margin-right: 22px;
+  cursor: pointer;
+}
+
+.cart {
+  opacity: 1;
+  transition: opacity 250ms linear;
+  cursor: pointer;
+}
+
+.cart:hover,
+.cart:focus {
+  opacity: 0.6;
+  transition: opacity 250ms linear;
+}
