@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import ProductsList from '../../components/ProductsList';
+
 import styles from './Category.module.css';
 
 class Category extends Component {
@@ -7,15 +9,9 @@ class Category extends Component {
     return (
       <main>
         <section className={styles.category}>
-          <h1 className={styles.title}>Category name</h1>
-          <ul>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-          </ul>
+          <h1 className={styles.title}>Clothes</h1>
+
+          <ProductsList />
         </section>
       </main>
     );

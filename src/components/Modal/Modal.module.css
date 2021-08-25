@@ -1,0 +1,22 @@
+.backdrop {
+  position: fixed;
+  top: 80px;
+  left: 0;
+
+  width: 100vw;
+  height: calc(100vh - 80px);
+
+  background-color: rgba(57, 55, 72, 0.22);
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  right: 85px;
+  min-height: 325px;
+  max-width: 325px;
+  width: 100%;
+  padding: 9px 16px 20px 16px;
+
+  background-color: #fff;
+}

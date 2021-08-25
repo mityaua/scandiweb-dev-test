@@ -31,9 +31,9 @@ class CurrencySwitcher extends Component {
     value: 'USD',
   };
 
-  handleChange = e => {
-    console.log(`Currency selected! ${e.target.value}`);
-    this.setState({ value: e.target.value });
+  handleChange = event => {
+    console.log(`Currency selected! ${event.target.value}`);
+    this.setState({ value: event.target.value });
   };
 
   render() {
@@ -45,11 +45,7 @@ class CurrencySwitcher extends Component {
           onChange={this.handleChange}
         >
           {options.map(option => (
-            <option
-              className={styles.option}
-              value={option.value}
-              key={option.value}
-            >
+            <option value={option.value} key={option.value}>
               {option.label}
             </option>
           ))}

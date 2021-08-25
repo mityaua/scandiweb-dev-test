@@ -14,6 +14,10 @@ const Category = lazy(() =>
   import('./pages/Category' /* webpackChunkName: "category-page" */),
 );
 
+const Cart = lazy(() =>
+  import('./pages/Cart' /* webpackChunkName: "cart-page" */),
+);
+
 class App extends Component {
   render() {
     return (
@@ -24,6 +28,10 @@ class App extends Component {
           <Switch>
             <Route exact path={routes.home}>
               <Category />
+            </Route>
+
+            <Route exact path={routes.cart}>
+              <Cart />
             </Route>
           </Switch>
         </Suspense>
