@@ -1,26 +1,38 @@
 .wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.sign {
   margin-right: 10px;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  border: none;
+  padding: 11px 25px 9px 0px;
+
   cursor: pointer;
 }
 
-.arrow {
-  margin-right: 22px;
-  cursor: pointer;
+.select {
+  background-image: linear-gradient(45deg, transparent 50%, #000000 50%),
+    linear-gradient(135deg, #000000 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
 }
 
-.cart {
-  opacity: 1;
-  transition: opacity 250ms linear;
-  cursor: pointer;
-}
-
-.cart:hover,
-.cart:focus {
-  opacity: 0.6;
-  transition: opacity 250ms linear;
+.select:focus {
+  background-image: linear-gradient(45deg, #000000 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, #000000 50%);
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: #000000;
+  outline: 0;
 }
