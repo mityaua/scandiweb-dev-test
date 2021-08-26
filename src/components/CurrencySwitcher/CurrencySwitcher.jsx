@@ -38,14 +38,18 @@ class CurrencySwitcher extends Component {
 
   render() {
     return (
-      <form className={styles.wrapper}>
+      <form>
         <select
           className={styles.select}
           value={this.state.value}
           onChange={this.handleChange}
         >
           {options.map(option => (
-            <option value={option.value} key={option.value}>
+            <option
+              className={styles.option}
+              value={option.value}
+              key={option.value}
+            >
               {option.label}
             </option>
           ))}

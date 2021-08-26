@@ -21,9 +21,14 @@ class Navigation extends Component {
         </li>
 
         <li className={styles.item}>
-          <a href="/" className={styles.link}>
+          <NavLink
+            exact
+            to={routes.tech}
+            className={styles.link}
+            activeClassName={styles['link--active']}
+          >
             tech
-          </a>
+          </NavLink>
         </li>
       </ul>
     );

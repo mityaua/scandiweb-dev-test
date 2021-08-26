@@ -1,27 +1,18 @@
-.wrapper {
-  margin-right: 10px;
-}
-
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
-
 .select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
+  appearance: none;
   border: none;
   padding: 11px 25px 9px 0px;
+  outline: 1px solid transparent;
 
-  cursor: pointer;
-}
+  font-size: 18px;
+  font-weight: 500;
 
-.select {
   background-image: url('../../images/arrow-down.svg');
   background-repeat: no-repeat;
   background-position: calc(100% - 20px) calc(1em + 2px),
     calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+
+  cursor: pointer;
 }
 
 .select:focus {
@@ -29,5 +20,11 @@ select:-moz-focusring {
   background-repeat: no-repeat;
   background-position: calc(100% - 20px) calc(1em + 2px),
     calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+
   outline: 1px solid transparent;
+}
+
+.option {
+  font-weight: 500;
+  font-size: 18px;
 }

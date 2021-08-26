@@ -1,5 +1,5 @@
 /* Outer wrapper for cart icon and counter */
-.outer {
+.wrapper {
   display: inline-flex;
   position: relative;
 
@@ -9,17 +9,21 @@
   transition: opacity 250ms linear;
 }
 
-/* Inner wrapper for cart icon and counter */
-.inner {
+.button {
   display: inline-flex;
+  border: none;
+  outline: 1px solid transparent;
+  padding: 0;
+
+  background-color: transparent;
 
   opacity: 1;
   transition: opacity 250ms linear;
   cursor: pointer;
 }
 
-.inner:hover,
-.inner:focus {
+.button:hover,
+.button:focus {
   opacity: 0.6;
   transition: opacity 250ms linear;
 }
@@ -55,6 +59,140 @@
 
 .title__name {
   font-weight: 700;
+}
+
+.product__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 41px;
+}
+
+.product__name {
+  margin-bottom: 5px;
+}
+
+.product__price {
+  margin-bottom: 27px;
+  font-weight: 500;
+}
+
+.attr__button {
+  font-family: Source Sans Pro, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.attr__button:not(:last-child) {
+  margin-right: 8px;
+}
+
+.counters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.square__button {
+  width: 24px;
+  height: 24px;
+
+  border: 1px solid #1d1f22;
+
+  background-color: #ffffff;
+
+  cursor: pointer;
+}
+
+.square__button--disabled {
+  border: 1px solid #a6a6a6;
+  opacity: 0.6;
+  background-color: rgba(166, 166, 166, 0.2);
+
+  cursor: default;
+}
+
+.counters__up {
+  margin-bottom: 30px;
+}
+
+.counters__count {
+  font-weight: 500;
+}
+
+.counters__down {
+  margin-top: 33px;
+}
+
+.product__thumb {
+  height: 137px;
+}
+
+.product__image {
+  max-width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.total__text {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1.125;
+}
+
+.total__price {
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons__button {
+  width: 140px;
+  padding: 13px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+
+  cursor: pointer;
+
+  opacity: 1;
+  transition: opacity 250ms linear;
+}
+
+.buttons__button:hover,
+.buttons__button:focus {
+  opacity: 0.6;
+  transition: opacity 250ms linear;
+}
+
+.buttons__view {
+  border: 1px solid #1d1f22;
+
+  color: #1d1f22;
+  background-color: #ffffff;
+}
+
+.buttons__check {
+  border: 1px solid transparent;
+
+  color: #ffffff;
+  background-color: #5ece7b;
 }
 
 .close {

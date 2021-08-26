@@ -18,6 +18,10 @@ const Cart = lazy(() =>
   import('./pages/Cart' /* webpackChunkName: "cart-page" */),
 );
 
+const Checkout = lazy(() =>
+  import('./pages/Checkout' /* webpackChunkName: "checkout-page" */),
+);
+
 class App extends Component {
   render() {
     return (
@@ -32,6 +36,10 @@ class App extends Component {
 
             <Route exact path={routes.cart}>
               <Cart />
+            </Route>
+
+            <Route exact path={routes.checkout}>
+              <Checkout />
             </Route>
           </Switch>
         </Suspense>
