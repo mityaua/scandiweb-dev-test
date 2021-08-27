@@ -101,8 +101,8 @@ class CartPreview extends Component {
 
             <div className={styles.product__wrapper}>
               <div>
-                <p className={styles.product__name}>Apollo Running Short</p>
-                <p className={styles.product__price}>$50.00</p>
+                <p className={styles.product__name}>Jupiter Wayfarer</p>
+                <p className={styles.product__price}>$75.00</p>
 
                 <button
                   type="button"
@@ -125,7 +125,7 @@ class CartPreview extends Component {
                 >
                   +
                 </button>
-                <span className={styles.counters__count}>1</span>
+                <span className={styles.counters__count}>2</span>
                 <button
                   type="button"
                   className={`${styles.square__button} ${styles.counters__down}`}

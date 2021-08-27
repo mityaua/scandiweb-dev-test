@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import CartProduct from '../../components/CartProduct';
 
 import styles from './Cart.module.css';
 
@@ -9,10 +10,7 @@ class Cart extends Component {
         <section className={styles.section}>
           <h1 className={styles.title}>Cart</h1>
 
-          <ul>
-            <li>Cart</li>
-            <li>Cart</li>
-          </ul>
+          <CartProduct />
         </section>
       </main>
     );
