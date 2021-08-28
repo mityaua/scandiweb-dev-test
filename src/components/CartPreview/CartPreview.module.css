@@ -68,6 +68,11 @@
   margin-bottom: 41px;
 }
 
+.product__content {
+  width: 136px;
+  margin-right: 18px;
+}
+
 .product__name {
   margin-bottom: 5px;
 }

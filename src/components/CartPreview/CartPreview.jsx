@@ -54,7 +54,7 @@ class CartPreview extends Component {
             {/* Products */}
 
             <div className={styles.product__wrapper}>
-              <div>
+              <div className={styles.product__content}>
                 <p className={styles.product__name}>Apollo Running Short</p>
                 <p className={styles.product__price}>$50.00</p>
 
@@ -100,7 +100,7 @@ class CartPreview extends Component {
             </div>
 
             <div className={styles.product__wrapper}>
-              <div>
+              <div className={styles.product__content}>
                 <p className={styles.product__name}>Jupiter Wayfarer</p>
                 <p className={styles.product__price}>$75.00</p>
 

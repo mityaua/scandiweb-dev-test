@@ -9,10 +9,13 @@
 }
 
 .product__name {
+  max-width: 250px;
   margin-bottom: 12px;
 
   font-size: 30px;
   font-weight: 400;
+
+  overflow-wrap: break-word;
 }
 
 .product__name:first-line {
