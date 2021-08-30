@@ -107,7 +107,15 @@
 
   background-color: #ffffff;
 
+  opacity: 1;
+  transition: opacity 250ms linear;
   cursor: pointer;
+}
+
+.square__button:hover,
+.square__button:focus {
+  opacity: 0.6;
+  transition: opacity 250ms linear;
 }
 
 .square__button--disabled {
