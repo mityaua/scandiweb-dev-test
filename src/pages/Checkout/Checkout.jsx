@@ -3,6 +3,10 @@ import { Component } from 'react';
 import styles from './Checkout.module.css';
 
 class Checkout extends Component {
+  componentDidMount() {
+    document.title = 'Checkout | Scandiweb Dev Test';
+  }
+
   render() {
     return (
       <main>

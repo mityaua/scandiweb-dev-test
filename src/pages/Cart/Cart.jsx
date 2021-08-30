@@ -4,6 +4,10 @@ import CartProduct from '../../components/CartProduct';
 import styles from './Cart.module.css';
 
 class Cart extends Component {
+  componentDidMount() {
+    document.title = 'Cart | Scandiweb Dev Test';
+  }
+
   render() {
     return (
       <main>

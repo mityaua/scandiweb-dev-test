@@ -6,6 +6,10 @@ import styles from './Product.module.css';
 import { data } from '../../product.json';
 
 class Product extends Component {
+  componentDidMount() {
+    document.title = 'Product example | Scandiweb Dev Test';
+  }
+
   render() {
     return (
       <main className={styles.main}>
