@@ -8,6 +8,10 @@ import styles from './Category.module.css';
 import products from '../../products.json';
 
 class Category extends Component {
+  componentDidMount() {
+    document.title = 'Category | Scandiweb Dev Test';
+  }
+
   render() {
     return (
       <main>
