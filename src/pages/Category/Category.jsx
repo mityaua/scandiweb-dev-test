@@ -4,6 +4,9 @@ import ProductsList from '../../components/ProductsList';
 
 import styles from './Category.module.css';
 
+// Mock
+import products from '../../products.json';
+
 class Category extends Component {
   render() {
     return (
@@ -11,7 +14,7 @@ class Category extends Component {
         <section className={styles.category}>
           <h1 className={styles.title}>Clothes</h1>
 
-          <ProductsList />
+          <ProductsList products={products} />
         </section>
       </main>
     );

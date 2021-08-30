@@ -3,11 +3,10 @@ import ProductsItem from '../ProductsItem';
 
 import styles from './ProductsList.module.css';
 
-// Mock
-import products from '../../products.json';
-
 class ProductsList extends Component {
   render() {
+    const products = this.props.products;
+
     return (
       <ul className={styles.list}>
         {products.map(product => (
