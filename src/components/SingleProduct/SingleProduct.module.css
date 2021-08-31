@@ -103,8 +103,9 @@
 }
 
 .add {
+  width: 292px;
+  height: 52px;
   margin-bottom: 40px;
-  padding: 16px 87px;
 
   color: #ffffff;
   background-color: #5ece7b;
