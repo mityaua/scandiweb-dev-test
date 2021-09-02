@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 
 import cart from './cart/cart_reducer';
+import categories from './categories/categories_reducer';
 
 // const cartConfig = {
 //   key: 'cart',
@@ -14,6 +15,7 @@ import cart from './cart/cart_reducer';
 const store = configureStore({
   reducer: {
     cart,
+    categories,
   },
 
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
