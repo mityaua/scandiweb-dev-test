@@ -1,12 +1,14 @@
 import { Component } from 'react';
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Container from './components/Container';
 import AppBar from './components/AppBar';
 import Loader from './components/Loader';
 
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import routes from './routes';
 
@@ -55,6 +57,8 @@ class App extends Component {
             </Route>
           </Switch>
         </Suspense>
+
+        <ToastContainer />
       </Container>
     );
   }

@@ -1,14 +1,21 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 
 import styles from './SingleProduct.module.css';
 
 class SingleProduct extends Component {
-  handleClick() {
-    alert('Added to cart');
+  addToCart() {
+    toast.success('Added to cart', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   }
 
   handleAttributes() {
-    alert('Selected');
+    toast.info('Selected', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   }
 
   render() {
@@ -71,11 +78,7 @@ class SingleProduct extends Component {
           <p className={styles.text}>price:</p>
           <p className={styles.price}>$50.00</p>
 
-          <button
-            type="button"
-            className={styles.add}
-            onClick={this.handleClick}
-          >
+          <button type="button" className={styles.add} onClick={this.addToCart}>
             add to cart
           </button>
 

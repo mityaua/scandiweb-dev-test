@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Modal from '../Modal';
 
@@ -10,12 +11,13 @@ import { ReactComponent as ArrowImage } from '../../images/arrow-up.svg';
 
 import routes from '../../routes';
 
+// Mock
+import products from '../../products.json';
+
 const body = document.querySelector('body');
 
 class CartPreview extends Component {
-  // Mock
   state = {
-    counter: 2,
     showModal: false,
   };
 
@@ -39,8 +41,8 @@ class CartPreview extends Component {
         <button className={styles.button} onClick={this.toggleModal}>
           <CartImage className={styles.cart} title="My Bag" alt="My Bag" />
 
-          {this.state.counter ? (
-            <span className={styles.counter}>{this.state.counter}</span>
+          {products.length > 0 ? (
+            <span className={styles.counter}>{products.length}</span>
           ) : null}
         </button>
 
@@ -48,102 +50,76 @@ class CartPreview extends Component {
           <Modal onClose={this.toggleModal}>
             <p className={styles.title}>
               <span className={styles.title__name}>My Bag</span>,{' '}
-              {this.state.counter} items
+              {products.length} items
             </p>
 
-            {/* Products */}
+            {products.map(product => {
+              return (
+                <div className={styles.product__wrapper} key={product.id}>
+                  <div className={styles.product__content}>
+                    <p className={styles.product__name}>{product.name}</p>
+                    <p className={styles.product__price}>
+                      ${product.prices[0].amount}
+                    </p>
 
-            <div className={styles.product__wrapper}>
-              <div className={styles.product__content}>
-                <p className={styles.product__name}>Apollo Running Short</p>
-                <p className={styles.product__price}>$50.00</p>
+                    {/* Mock */}
 
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.attr__button}`}
-                >
-                  S
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
-                >
-                  M
-                </button>
-              </div>
+                    <div>
+                      <button
+                        type="button"
+                        className={`${styles.square__button} ${styles.attr__button}`}
+                      >
+                        S
+                      </button>
+                      <button
+                        type="button"
+                        className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
+                      >
+                        M
+                      </button>
+                    </div>
+                  </div>
 
-              <div className={styles.counters}>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.counters__up}`}
-                >
-                  +
-                </button>
-                <span className={styles.counters__count}>1</span>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.counters__down}`}
-                >
-                  -
-                </button>
-              </div>
+                  <div className={styles.counters}>
+                    <button
+                      type="button"
+                      className={`${styles.square__button} ${styles.counters__up}`}
+                      onClick={() =>
+                        toast.success('Increment', {
+                          position: 'top-center',
+                          autoClose: 2000,
+                        })
+                      }
+                    >
+                      +
+                    </button>
+                    <span className={styles.counters__count}>1</span>
+                    <button
+                      type="button"
+                      className={`${styles.square__button} ${styles.counters__down}`}
+                      onClick={() =>
+                        toast.success('Decrement', {
+                          position: 'top-center',
+                          autoClose: 2000,
+                        })
+                      }
+                    >
+                      -
+                    </button>
+                  </div>
 
-              <div className={styles.product__thumb}>
-                <img
-                  src="https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087"
-                  className={styles.product__image}
-                  alt=""
-                  width="105"
-                  height="137"
-                />
-              </div>
-            </div>
-
-            <div className={styles.product__wrapper}>
-              <div className={styles.product__content}>
-                <p className={styles.product__name}>Jupiter Wayfarer</p>
-                <p className={styles.product__price}>$75.00</p>
-
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.attr__button}`}
-                >
-                  S
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
-                >
-                  M
-                </button>
-              </div>
-
-              <div className={styles.counters}>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.counters__up}`}
-                >
-                  +
-                </button>
-                <span className={styles.counters__count}>2</span>
-                <button
-                  type="button"
-                  className={`${styles.square__button} ${styles.counters__down}`}
-                >
-                  -
-                </button>
-              </div>
-
-              <div className={styles.product__thumb}>
-                <img
-                  src="https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016105/product-image/2409L_61.jpg"
-                  className={styles.product__image}
-                  alt=""
-                  width="105"
-                  height="137"
-                />
-              </div>
-            </div>
+                  <div className={styles.product__thumb}>
+                    <img
+                      src={product.gallery[0]}
+                      className={styles.product__image}
+                      alt=""
+                      width="105"
+                      height="137"
+                    />
+                  </div>
+                </div>
+              );
+            })}
 
             <div className={styles.total}>
               <span className={styles.total__text}>Total</span>
@@ -153,7 +129,7 @@ class CartPreview extends Component {
             <div className={styles.buttons}>
               <Link
                 to={routes.cart}
-                className={`${styles.buttons__button} ${styles.buttons__view}`}
+                className={`${styles.buttons__link} ${styles.buttons__view}`}
                 onClick={this.toggleModal}
               >
                 View bag
@@ -161,7 +137,7 @@ class CartPreview extends Component {
 
               <Link
                 to={routes.checkout}
-                className={`${styles.buttons__button} ${styles.buttons__check}`}
+                className={`${styles.buttons__link} ${styles.buttons__check}`}
                 onClick={this.toggleModal}
               >
                 Check out

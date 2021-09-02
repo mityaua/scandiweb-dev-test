@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import styles from './ProductsItem.module.css';
 
@@ -9,7 +10,10 @@ import { ReactComponent as EmpryCart } from '../../images/empty-cart.svg';
 
 class ProductsItem extends Component {
   addToCart = () => {
-    alert('Added to cart');
+    toast.success('Added to cart', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   };
 
   render() {

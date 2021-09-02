@@ -81,12 +81,16 @@
   cursor: pointer;
 }
 
+.counters__button:active {
+  color: #ffffff;
+  background-color: #1d1f22;
+}
+
 .counters__value {
   font-weight: 500;
   font-size: 24px;
 }
 
-/* !!! 185px !!! */
 .gallery {
   height: 203px;
   width: 141px;

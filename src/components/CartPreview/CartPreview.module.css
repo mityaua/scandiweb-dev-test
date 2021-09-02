@@ -74,6 +74,7 @@
 }
 
 .product__name {
+  height: 53px;
   margin-bottom: 5px;
 }
 
@@ -112,10 +113,9 @@
   cursor: pointer;
 }
 
-.square__button:hover,
-.square__button:focus {
-  opacity: 0.6;
-  transition: opacity 250ms linear;
+.square__button:active {
+  color: #ffffff;
+  background-color: #1d1f22;
 }
 
 .square__button--disabled {
@@ -172,7 +172,7 @@
   align-items: center;
 }
 
-.buttons__button {
+.buttons__link {
   width: 140px;
   padding: 13px;
 
@@ -188,8 +188,8 @@
   transition: opacity 250ms linear;
 }
 
-.buttons__button:hover,
-.buttons__button:focus {
+.buttons__link:hover,
+.buttons__link:focus {
   opacity: 0.6;
   transition: opacity 250ms linear;
 }
