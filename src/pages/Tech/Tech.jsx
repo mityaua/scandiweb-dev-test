@@ -32,8 +32,8 @@ class Tech extends Component {
   }
 }
 
-const mapDispatchToProps = distatch => ({
-  onLoad: () => distatch(getCategories()),
+const mapDispatchToProps = dispatch => ({
+  onLoad: () => dispatch(getCategories()),
 });
 
 export default connect(null, mapDispatchToProps)(Tech);

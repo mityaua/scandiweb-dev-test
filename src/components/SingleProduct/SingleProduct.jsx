@@ -1,23 +1,40 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { addProductSuccess } from '../../redux/cart/cart_action';
 
 import styles from './SingleProduct.module.css';
 
 class SingleProduct extends Component {
-  addToCart() {
+  state = {
+    cover: '',
+  };
+
+  componentDidMount() {
+    this.setState({ cover: this.props.product.gallery[0] });
+  }
+
+  addToCart = () => {
+    this.props.dispatchToCart();
+
     toast.success('Added to cart', {
       position: 'top-center',
       autoClose: 2000,
     });
-  }
+  };
 
-  handleAttributes() {
+  handleAttributes = () => {
     toast.info('Selected', {
       position: 'top-center',
       autoClose: 2000,
     });
-  }
+  };
+
+  handleCover = event => {
+    this.setState({ cover: event.target.src });
+  };
 
   render() {
     const product = this.props.product;
@@ -37,6 +54,7 @@ class SingleProduct extends Component {
                   width="79"
                   height="80"
                   loading="lazy"
+                  onClick={this.handleCover}
                 />
               );
             })}
@@ -44,7 +62,7 @@ class SingleProduct extends Component {
 
           <div className={styles.cover}>
             <img
-              src={product.gallery[0]}
+              src={this.state.cover}
               className={styles.cover__image}
               alt={product.name}
               title={product.name}
@@ -59,11 +77,11 @@ class SingleProduct extends Component {
           <h1 className={styles.title}>{product.name}</h1>
 
           {product.attributes.length > 0 ? (
-            <p className={styles.text}>size:</p>
+            <p className={styles.size}>size:</p>
           ) : null}
 
           {product.attributes.length > 0 ? (
-            <div>
+            <div className={styles.attributes}>
               {product.attributes[0].items.map(item => {
                 return (
                   <button
@@ -103,4 +121,8 @@ class SingleProduct extends Component {
   }
 }
 
-export default withRouter(SingleProduct);
+const mapDispatchToProps = dispatch => ({
+  dispatchToCart: () => dispatch(addProductSuccess()),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(SingleProduct));

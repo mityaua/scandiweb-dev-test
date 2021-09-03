@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const getAllProductsRequest = createAction('cart/getAllProductsRequest');
-export const getAllProductsSuccess = createAction('cart/getAllProductsSuccess');
-export const getAllProductsError = createAction('cart/getAllProductsError');
+export const addProductRequest = createAction('cart/addProductRequest');
+export const addProductSuccess = createAction('cart/addProductSuccess');
+export const addProductError = createAction('cart/addProductError');
