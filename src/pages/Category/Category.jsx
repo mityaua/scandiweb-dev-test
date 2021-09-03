@@ -1,39 +1,61 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
+import { graphql } from '@apollo/client/react/hoc';
+import { gql } from '@apollo/client';
 
 import ProductsList from '../../components/ProductsList';
-import { getCategories } from '../../redux/categories/categories_operations';
+import Loader from '../../components/Loader';
 
 import styles from './Category.module.css';
 
-// Mock
-import { data } from '../../products.json';
-
 class Category extends Component {
   componentDidMount() {
-    this.props.onLoad();
     document.title = 'Clothes | Scandiweb Dev Test';
   }
 
   render() {
-    // Mock
-    const products = data.categories[0].products;
-    const categoryName = data.categories[0].name;
+    const { data } = this.props;
+    const { loading, error } = data;
 
     return (
       <main>
         <section className={styles.category}>
-          <h1 className={styles.title}>{categoryName}</h1>
+          {data.category && (
+            <h1 className={styles.title}>{data.category.name}</h1>
+          )}
 
-          <ProductsList products={products} category={categoryName} />
+          {data.category && (
+            <ProductsList
+              products={data.category.products}
+              category={data.category.name}
+            />
+          )}
         </section>
+
+        {error && <p>{JSON.stringify(data.error.message)}</p>}
+
+        {loading && <Loader />}
       </main>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(getCategories()),
-});
-
-export default connect(null, mapDispatchToProps)(Category);
+export default graphql(
+  gql`
+    query {
+      category(input: { title: "clothes" }) {
+        name
+        products {
+          id
+          name
+          inStock
+          gallery
+          category
+          prices {
+            currency
+            amount
+          }
+        }
+      }
+    }
+  `,
+)(Category);
