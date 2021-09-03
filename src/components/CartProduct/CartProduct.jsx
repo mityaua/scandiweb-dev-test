@@ -3,11 +3,13 @@ import { toast } from 'react-toastify';
 
 import styles from './CartProduct.module.css';
 
-// Mock data
-import products from '../../products.json';
+// Mock
+import { data } from '../../products.json';
 
 class CartProduct extends Component {
   render() {
+    const products = data.categories[0].products;
+
     return (
       <ul>
         {products.map(product => {

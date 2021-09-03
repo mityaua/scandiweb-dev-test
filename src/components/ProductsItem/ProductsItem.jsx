@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import styles from './ProductsItem.module.css';
 
-import routes from '../../routes';
+// import routes from '../../routes';
 
 import { ReactComponent as EmpryCart } from '../../images/empty-cart.svg';
 
@@ -18,6 +18,7 @@ class ProductsItem extends Component {
 
   render() {
     const product = this.props.product;
+
     const stockStatus = product.inStock
       ? styles.item
       : `${styles.item} ${styles['item--none']}`;
@@ -26,7 +27,7 @@ class ProductsItem extends Component {
       <li className={stockStatus}>
         <Link
           to={{
-            pathname: `${routes.clothes}/${product.id}`,
+            pathname: `${product.category}/${product.id}`,
             state: { from: this.props.location },
           }}
           className={styles.item__link}

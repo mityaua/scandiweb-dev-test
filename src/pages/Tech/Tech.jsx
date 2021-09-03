@@ -4,21 +4,21 @@ import { connect } from 'react-redux';
 import ProductsList from '../../components/ProductsList';
 import { getCategories } from '../../redux/categories/categories_operations';
 
-import styles from './Category.module.css';
+import styles from './Tech.module.css';
 
 // Mock
 import { data } from '../../products.json';
 
-class Category extends Component {
+class Tech extends Component {
   componentDidMount() {
     this.props.onLoad();
-    document.title = 'Clothes | Scandiweb Dev Test';
+    document.title = 'Tech | Scandiweb Dev Test';
   }
 
   render() {
     // Mock
-    const products = data.categories[0].products;
-    const categoryName = data.categories[0].name;
+    const products = data.categories[1].products;
+    const categoryName = data.categories[1].name;
 
     return (
       <main>
@@ -36,4 +36,4 @@ const mapDispatchToProps = distatch => ({
   onLoad: () => distatch(getCategories()),
 });
 
-export default connect(null, mapDispatchToProps)(Category);
+export default connect(null, mapDispatchToProps)(Tech);

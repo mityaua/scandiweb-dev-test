@@ -12,7 +12,7 @@ import { ReactComponent as ArrowImage } from '../../images/arrow-up.svg';
 import routes from '../../routes';
 
 // Mock
-import products from '../../products.json';
+import { data } from '../../products.json';
 
 const body = document.querySelector('body');
 
@@ -35,6 +35,8 @@ class CartPreview extends Component {
 
   render() {
     const { showModal } = this.state;
+    // Mock
+    const products = data.categories[0].products;
 
     return (
       <div className={styles.wrapper}>

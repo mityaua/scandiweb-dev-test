@@ -16,6 +16,11 @@ const Category = lazy(() =>
   import('./pages/Category' /* webpackChunkName: "category-page" */),
 );
 
+// Only for testing!
+const Tech = lazy(() =>
+  import('./pages/Tech' /* webpackChunkName: "product-page" */),
+);
+
 const Product = lazy(() =>
   import('./pages/Product' /* webpackChunkName: "product-page" */),
 );
@@ -38,6 +43,10 @@ class App extends Component {
           <Switch>
             <Route exact path={routes.home}>
               <Category />
+            </Route>
+
+            <Route exact path={routes.tech}>
+              <Tech />
             </Route>
 
             <Route exact path={routes.clothesProducts}>
