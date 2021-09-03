@@ -20,74 +20,83 @@ class SingleProduct extends Component {
   }
 
   render() {
-    const data = this.props.product;
+    const product = this.props.product;
 
     return (
       <article className={styles.product}>
         <div className={styles.gallery}>
-          {/* Preview images */}
           <div className={styles.gallery__thumbs}>
-            {data.product.gallery.map(image => {
+            {product.gallery.map(image => {
               return (
                 <img
                   src={image}
+                  key={image}
                   className={styles.gallery__thumb}
+                  alt={product.name}
+                  title={product.name}
                   width="79"
                   height="80"
-                  alt={data.product.name}
-                  title={data.product.name}
-                  key={image}
+                  loading="lazy"
                 />
               );
             })}
           </div>
 
-          {/* Main image */}
           <div className={styles.cover}>
             <img
-              src={data.product.gallery[0]}
+              src={product.gallery[0]}
               className={styles.cover__image}
+              alt={product.name}
+              title={product.name}
               width="610"
               height="511"
-              alt={data.product.name}
-              title={data.product.name}
+              loading="lazy"
             />
           </div>
         </div>
 
         <aside className={styles.sidebar}>
-          <h1 className={styles.title}>{data.product.name}</h1>
+          <h1 className={styles.title}>{product.name}</h1>
 
-          <p className={styles.text}>size:</p>
+          {product.attributes.length > 0 ? (
+            <p className={styles.text}>size:</p>
+          ) : null}
 
-          {/* Radiobuttons in future */}
-          <div>
-            {data.product.attributes[0].items.map(item => {
-              return (
-                <button
-                  type="button"
-                  className={styles.radio}
-                  key={item.id}
-                  onClick={this.handleAttributes}
-                >
-                  {item.displayValue}
-                </button>
-              );
-            })}
-          </div>
+          {product.attributes.length > 0 ? (
+            <div>
+              {product.attributes[0].items.map(item => {
+                return (
+                  <button
+                    type="button"
+                    className={styles.radio}
+                    key={item.id}
+                    onClick={this.handleAttributes}
+                  >
+                    {item.displayValue}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
 
-          <p className={styles.text}>price:</p>
-          <p className={styles.price}>$50.00</p>
+          <p className={styles.text}>
+            {product.inStock ? 'price' : 'last price'}:
+          </p>
+          <p className={styles.price}>${product.prices[0].amount}</p>
 
-          <button type="button" className={styles.add} onClick={this.addToCart}>
-            add to cart
+          <button
+            type="button"
+            className={styles.add}
+            onClick={this.addToCart}
+            disabled={!product.inStock}
+          >
+            {product.inStock ? 'add to cart' : 'Out of stock'}
           </button>
 
-          <p className={styles.description}>
-            Find stunning women's cocktail dresses and party dresses. Stand out
-            in lace and metallic cocktail dresses and party dresses from all
-            your favorite brands.
-          </p>
+          <p
+            className={styles.description}
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          ></p>
         </aside>
       </article>
     );

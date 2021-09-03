@@ -38,10 +38,11 @@ class ProductsItem extends Component {
               <img
                 src={product.gallery[0]}
                 className={styles.item__image}
-                width="356"
-                height="338"
                 title={product.name}
                 alt={product.name}
+                width="356"
+                height="338"
+                loading="lazy"
               />
             </div>
 
