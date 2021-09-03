@@ -25,7 +25,7 @@ class Tech extends Component {
         <section className={styles.category}>
           <h1 className={styles.title}>{categoryName}</h1>
 
-          <ProductsList products={products} />
+          <ProductsList products={products} category={categoryName} />
         </section>
       </main>
     );

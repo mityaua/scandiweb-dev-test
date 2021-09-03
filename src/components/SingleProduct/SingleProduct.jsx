@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import styles from './SingleProduct.module.css';
@@ -93,4 +94,4 @@ class SingleProduct extends Component {
   }
 }
 
-export default SingleProduct;
+export default withRouter(SingleProduct);

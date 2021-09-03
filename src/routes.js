@@ -2,9 +2,9 @@
 export default {
   home: '/',
   clothes: '/clothes',
-  clothesProducts: '/clothes/:productid',
+  clothesProducts: '/clothes/:productId',
   tech: '/tech',
-  techProducts: '/tech/:productid',
+  techProducts: '/tech/:productId',
   cart: '/cart',
   checkout: '/checkout',
 };

@@ -18,6 +18,7 @@ class ProductsItem extends Component {
 
   render() {
     const product = this.props.product;
+    const categoryName = this.props.category;
 
     const stockStatus = product.inStock
       ? styles.item
@@ -27,7 +28,7 @@ class ProductsItem extends Component {
       <li className={stockStatus}>
         <Link
           to={{
-            pathname: `${product.category}/${product.id}`,
+            pathname: `${categoryName}/${product.id}`,
             state: { from: this.props.location },
           }}
           className={styles.item__link}
