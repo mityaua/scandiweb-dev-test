@@ -1,6 +1,9 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { addProductSuccess } from '../../redux/cart/cart_action';
 
 import styles from './ProductsItem.module.css';
 
@@ -10,6 +13,8 @@ import { ReactComponent as EmpryCart } from '../../images/empty-cart.svg';
 
 class ProductsItem extends Component {
   addToCart = () => {
+    this.props.dispatchToCart();
+
     toast.success('Added to cart', {
       position: 'top-center',
       autoClose: 2000,
@@ -73,4 +78,8 @@ class ProductsItem extends Component {
   }
 }
 
-export default withRouter(ProductsItem);
+const mapDispatchToProps = dispatch => ({
+  dispatchToCart: () => dispatch(addProductSuccess()),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(ProductsItem));

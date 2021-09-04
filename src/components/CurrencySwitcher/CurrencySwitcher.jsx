@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { graphql } from '@apollo/client/react/hoc';
+import { gql } from '@apollo/client';
 
 import styles from './CurrencySwitcher.module.css';
 
@@ -37,6 +39,11 @@ class CurrencySwitcher extends Component {
   };
 
   render() {
+    const { data } = this.props;
+    // const { loading, error } = data;
+
+    console.log(data.currencies);
+
     return (
       <form>
         <select
@@ -59,4 +66,10 @@ class CurrencySwitcher extends Component {
   }
 }
 
-export default CurrencySwitcher;
+export default graphql(
+  gql`
+    query GET_CURRENCIES {
+      currencies
+    }
+  `,
+)(CurrencySwitcher);
