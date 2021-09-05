@@ -8,7 +8,7 @@ import { data } from '../../products.json';
 
 class CartProduct extends Component {
   render() {
-    const products = data.categories[0].products;
+    const products = data.categories[1].products;
 
     return (
       <ul>

@@ -36,7 +36,7 @@ class CartPreview extends Component {
   render() {
     const { showModal } = this.state;
     // Mock
-    const products = data.categories[0].products;
+    const products = data.categories[1].products;
 
     return (
       <div className={styles.wrapper}>

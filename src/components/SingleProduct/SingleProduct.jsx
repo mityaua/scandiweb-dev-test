@@ -77,7 +77,7 @@ class SingleProduct extends Component {
           <h1 className={styles.title}>{product.name}</h1>
 
           {product.attributes.length > 0 ? (
-            <p className={styles.size}>size:</p>
+            <p className={styles.subtitle}>{product.attributes[0].name}:</p>
           ) : null}
 
           {product.attributes.length > 0 ? (
@@ -89,15 +89,19 @@ class SingleProduct extends Component {
                     className={styles.radio}
                     key={item.id}
                     onClick={this.handleAttributes}
+                    style={{ backgroundColor: `${item.value}` }}
+                    title={item.displayValue}
                   >
-                    {item.displayValue}
+                    {product.attributes[0].name === 'Color'
+                      ? ''
+                      : item.displayValue}
                   </button>
                 );
               })}
             </div>
           ) : null}
 
-          <p className={styles.text}>
+          <p className={styles.subtitle}>
             {product.inStock ? 'price' : 'last price'}:
           </p>
           <p className={styles.price}>${product.prices[0].amount}</p>

@@ -61,7 +61,7 @@
   font-weight: 600;
 }
 
-.size {
+.subtitle {
   margin-bottom: 8px;
 
   font-family: Roboto Condensed, sans-serif;
@@ -99,9 +99,15 @@
   margin-bottom: 12px;
 }
 
+.radio:hover,
+.radio:focus {
+  opacity: 0.6;
+  transition: opacity 250ms linear;
+}
+
 .radio:active {
-  color: #ffffff;
-  background-color: #1d1f22;
+  transform: scale(0.9);
+  transition: all 250ms linear;
 }
 
 .price {
