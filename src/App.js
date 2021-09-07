@@ -43,6 +43,10 @@ class App extends Component {
               <Category />
             </Route>
 
+            <Route exact path={routes.clothes}>
+              <Category />
+            </Route>
+
             <Route exact path={routes.tech}>
               <Tech />
             </Route>

@@ -16,6 +16,17 @@ class Navigation extends Component {
             className={styles.link}
             activeClassName={styles['link--active']}
           >
+            all
+          </NavLink>
+        </li>
+
+        <li className={styles.item}>
+          <NavLink
+            exact
+            to={routes.clothes}
+            className={styles.link}
+            activeClassName={styles['link--active']}
+          >
             clothes
           </NavLink>
         </li>
