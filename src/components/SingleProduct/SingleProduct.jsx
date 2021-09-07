@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { addProductSuccess } from '../../redux/cart/cart_action';
 
@@ -19,17 +18,11 @@ class SingleProduct extends Component {
   addToCart = () => {
     this.props.dispatchToCart();
 
-    toast.success('Added to cart', {
-      position: 'top-center',
-      autoClose: 2000,
-    });
+    alert('Added to cart');
   };
 
   handleAttributes = () => {
-    toast.info('Selected', {
-      position: 'top-center',
-      autoClose: 2000,
-    });
+    alert('Selected');
   };
 
   handleCover = event => {

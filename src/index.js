@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-// import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import store from './redux/store';
 
 import App from './App';
-// import Loader from './components/Loader';
 
-import 'modern-normalize/modern-normalize.css';
+import './styles/normalizer.css';
 import './fonts/fonts.css';
 import './index.css';
 

@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import Modal from '../Modal';
 
@@ -86,12 +85,7 @@ class CartPreview extends Component {
                     <button
                       type="button"
                       className={`${styles.square__button} ${styles.counters__up}`}
-                      onClick={() =>
-                        toast.success('Increment', {
-                          position: 'top-center',
-                          autoClose: 2000,
-                        })
-                      }
+                      onClick={() => alert('Increment')}
                     >
                       +
                     </button>
@@ -99,12 +93,7 @@ class CartPreview extends Component {
                     <button
                       type="button"
                       className={`${styles.square__button} ${styles.counters__down}`}
-                      onClick={() =>
-                        toast.success('Decrement', {
-                          position: 'top-center',
-                          autoClose: 2000,
-                        })
-                      }
+                      onClick={() => alert('Decrement')}
                     >
                       -
                     </button>

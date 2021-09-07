@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { toast } from 'react-toastify';
 
 import styles from './CartProduct.module.css';
 
@@ -37,12 +36,7 @@ class CartProduct extends Component {
                   <button
                     type="button"
                     className={styles.counters__button}
-                    onClick={() =>
-                      toast.success('Increment', {
-                        position: 'top-center',
-                        autoClose: 2000,
-                      })
-                    }
+                    onClick={() => alert('Increment')}
                   >
                     +
                   </button>
@@ -50,12 +44,7 @@ class CartProduct extends Component {
                   <button
                     type="button"
                     className={styles.counters__button}
-                    onClick={() =>
-                      toast.success('Decrement', {
-                        position: 'top-center',
-                        autoClose: 2000,
-                      })
-                    }
+                    onClick={() => alert('Decrement')}
                   >
                     -
                   </button>
