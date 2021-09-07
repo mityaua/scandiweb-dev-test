@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 import { addProductSuccess } from '../../redux/cart/cart_action';
 
@@ -68,11 +69,9 @@ class SingleProduct extends Component {
 
         <aside className={styles.sidebar}>
           <h1 className={styles.title}>{product.name}</h1>
-
           {product.attributes.length > 0 ? (
             <p className={styles.subtitle}>{product.attributes[0].name}:</p>
           ) : null}
-
           {product.attributes.length > 0 ? (
             <div className={styles.attributes}>
               {product.attributes[0].items.map(item => {
@@ -93,12 +92,10 @@ class SingleProduct extends Component {
               })}
             </div>
           ) : null}
-
           <p className={styles.subtitle}>
             {product.inStock ? 'price' : 'last price'}:
           </p>
           <p className={styles.price}>${product.prices[0].amount}</p>
-
           <button
             type="button"
             className={styles.add}
@@ -108,10 +105,7 @@ class SingleProduct extends Component {
             {product.inStock ? 'add to cart' : 'Out of stock'}
           </button>
 
-          <p
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          ></p>
+          <div className={styles.description}>{parse(product.description)}</div>
         </aside>
       </article>
     );

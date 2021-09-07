@@ -40,7 +40,6 @@ class CurrencySwitcher extends Component {
 
   render() {
     const { data } = this.props;
-    // const { loading, error } = data;
 
     console.log(data.currencies);
 
