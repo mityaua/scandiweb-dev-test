@@ -30,23 +30,21 @@ class App extends Component {
   render() {
     const { data } = this.props;
 
-    // const all = data?.categories?.reduce((acc, item) => {
-    //   acc.push(...item.products);
-    //   return acc;
-    // }, []);
-
-    // console.log(all);
+    const all = data?.categories?.reduce((acc, item) => {
+      acc.push(...item.products);
+      return acc;
+    }, []);
 
     return (
       <Container>
-        <AppBar />
+        <AppBar categories={data.categories} />
 
         <Suspense fallback={<Loader />}>
           <Switch>
             {data.categories && (
               <Route exact path="/">
                 <Category
-                  category={data.categories[0]}
+                  products={all}
                   error={data.error}
                   loading={data.loading}
                 />
@@ -58,7 +56,8 @@ class App extends Component {
                 return (
                   <Route exact path={`/${category.name}`} key={category.name}>
                     <Category
-                      category={category}
+                      products={category.products}
+                      name={category.name}
                       error={data.error}
                       loading={data.loading}
                     />

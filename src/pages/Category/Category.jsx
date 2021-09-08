@@ -11,20 +11,22 @@ class Category extends Component {
   }
 
   render() {
-    const category = this.props.category;
+    const products = this.props.products;
+    const categoryName = this.props.name;
     const loading = this.props.loading;
     const error = this.props.error;
 
     return (
       <main>
         <section className={styles.category}>
-          {category.name && <h1 className={styles.title}>{category.name}</h1>}
+          {categoryName ? (
+            <h1 className={styles.title}>{categoryName}</h1>
+          ) : (
+            <h1 className={styles.title}>{'all'}</h1>
+          )}
 
-          {category && (
-            <ProductsList
-              products={category.products}
-              category={category.name}
-            />
+          {products && (
+            <ProductsList products={products} category={categoryName} />
           )}
         </section>
 

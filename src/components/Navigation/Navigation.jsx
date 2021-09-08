@@ -7,6 +7,8 @@ import routes from '../../routes';
 
 class Navigation extends Component {
   render() {
+    const categories = this.props.categories;
+
     return (
       <ul className={styles.list}>
         <li className={styles.item}>
@@ -20,27 +22,21 @@ class Navigation extends Component {
           </NavLink>
         </li>
 
-        <li className={styles.item}>
-          <NavLink
-            exact
-            to={routes.clothes}
-            className={styles.link}
-            activeClassName={styles['link--active']}
-          >
-            clothes
-          </NavLink>
-        </li>
-
-        <li className={styles.item}>
-          <NavLink
-            exact
-            to={routes.tech}
-            className={styles.link}
-            activeClassName={styles['link--active']}
-          >
-            tech
-          </NavLink>
-        </li>
+        {categories &&
+          categories.map(category => {
+            return (
+              <li className={styles.item} key={category.name}>
+                <NavLink
+                  exact
+                  to={`/${category.name}`}
+                  className={styles.link}
+                  activeClassName={styles['link--active']}
+                >
+                  {category.name}
+                </NavLink>
+              </li>
+            );
+          })}
       </ul>
     );
   }

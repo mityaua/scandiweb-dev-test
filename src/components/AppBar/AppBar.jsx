@@ -10,7 +10,7 @@ class AppBar extends Component {
   render() {
     return (
       <header className={styles.header}>
-        <Navigation />
+        <Navigation categories={this.props.categories} />
         <Logo />
         <div className={styles.wrapper}>
           <CurrencySwitcher />

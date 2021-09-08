@@ -14,7 +14,7 @@ class ProductsList extends Component {
           <ProductsItem
             key={product.id}
             product={product}
-            category={categoryName}
+            category={categoryName || product.category}
           />
         ))}
       </ul>
