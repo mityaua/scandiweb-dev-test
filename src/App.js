@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { graphql } from '@apollo/client/react/hoc';
+import { gql } from '@apollo/client';
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
@@ -12,11 +14,6 @@ import routes from './routes';
 
 const Category = lazy(() =>
   import('./pages/Category' /* webpackChunkName: "category-page" */),
-);
-
-// Only for testing!
-const Tech = lazy(() =>
-  import('./pages/Tech' /* webpackChunkName: "product-page" */),
 );
 
 const Product = lazy(() =>
@@ -33,6 +30,8 @@ const Checkout = lazy(() =>
 
 class App extends Component {
   render() {
+    const { data } = this.props;
+
     return (
       <Container>
         <AppBar />
@@ -40,16 +39,27 @@ class App extends Component {
         <Suspense fallback={<Loader />}>
           <Switch>
             <Route exact path={routes.home}>
-              <Category />
+              {data.categories && (
+                <Category
+                  category={data.categories[0]}
+                  error={data.error}
+                  loading={data.loading}
+                />
+              )}
             </Route>
 
-            <Route exact path={routes.clothes}>
-              <Category />
-            </Route>
-
-            <Route exact path={routes.tech}>
-              <Tech />
-            </Route>
+            {data.categories &&
+              data.categories.map(category => {
+                return (
+                  <Route exact path={`/${category.name}`} key={category.name}>
+                    <Category
+                      category={category}
+                      error={data.error}
+                      loading={data.loading}
+                    />
+                  </Route>
+                );
+              })}
 
             <Route exact path={routes.clothesProducts}>
               <Product />
@@ -73,4 +83,23 @@ class App extends Component {
   }
 }
 
-export default App;
+export default graphql(
+  gql`
+    query {
+      categories {
+        name
+        products {
+          id
+          name
+          inStock
+          gallery
+          category
+          prices {
+            currency
+            amount
+          }
+        }
+      }
+    }
+  `,
+)(App);

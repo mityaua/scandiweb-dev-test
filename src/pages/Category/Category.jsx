@@ -1,6 +1,4 @@
 import { Component } from 'react';
-import { graphql } from '@apollo/client/react/hoc';
-import { gql } from '@apollo/client';
 
 import ProductsList from '../../components/ProductsList';
 import Loader from '../../components/Loader';
@@ -13,25 +11,24 @@ class Category extends Component {
   }
 
   render() {
-    const { data } = this.props;
-    const { loading, error } = data;
+    const category = this.props.category;
+    const loading = this.props.loading;
+    const error = this.props.error;
 
     return (
       <main>
         <section className={styles.category}>
-          {data.category && (
-            <h1 className={styles.title}>{data.category.name}</h1>
-          )}
+          {category.name && <h1 className={styles.title}>{category.name}</h1>}
 
-          {data.category && (
+          {category && (
             <ProductsList
-              products={data.category.products}
-              category={data.category.name}
+              products={category.products}
+              category={category.name}
             />
           )}
         </section>
 
-        {error && <p>{JSON.stringify(data.error.message)}</p>}
+        {error && <p>{JSON.stringify(error.message)}</p>}
 
         {loading && <Loader />}
       </main>
@@ -39,23 +36,4 @@ class Category extends Component {
   }
 }
 
-export default graphql(
-  gql`
-    query {
-      category(input: { title: "clothes" }) {
-        name
-        products {
-          id
-          name
-          inStock
-          gallery
-          category
-          prices {
-            currency
-            amount
-          }
-        }
-      }
-    }
-  `,
-)(Category);
+export default Category;
