@@ -29,6 +29,7 @@ const Checkout = lazy(() =>
 class App extends Component {
   render() {
     const { data } = this.props;
+    const { error, loading } = data;
 
     const all = data?.categories?.reduce((acc, item) => {
       acc.push(...item.products);
@@ -87,6 +88,10 @@ class App extends Component {
             </Route>
           </Switch>
         </Suspense>
+
+        {error && <p>{JSON.stringify(error.message)}</p>}
+
+        {loading && <Loader />}
       </Container>
     );
   }
