@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import { graphql } from '@apollo/client/react/hoc';
 import { gql } from '@apollo/client';
 
@@ -7,60 +7,103 @@ import styles from './CurrencySwitcher.module.css';
 // Mock (need $ + USD in dropdown)
 const options = [
   {
-    label: '$',
+    label: '$ USD',
     value: 'USD',
   },
   {
-    label: '£',
+    label: '£ GBP',
     value: 'GBP',
   },
   {
-    label: '¥',
+    label: '¥ JPY',
     value: 'JPY',
   },
   {
-    label: 'A$',
+    label: '$ AUD',
     value: 'AUD',
   },
   {
-    label: '₽',
+    label: '₽ RUB',
     value: 'RUB',
   },
 ];
 
 class CurrencySwitcher extends Component {
+  container = createRef();
+
   state = {
-    value: 'USD',
+    open: false,
+    label: '$',
   };
 
-  handleChange = event => {
-    console.log(`Currency selected! ${event.target.value}`);
-    this.setState({ value: event.target.value });
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  handleButtonClick = () => {
+    this.setState(state => {
+      return {
+        open: !state.open,
+      };
+    });
+  };
+
+  handleClickOutside = event => {
+    if (
+      this.container.current &&
+      !this.container.current.contains(event.target)
+    ) {
+      this.setState({
+        open: false,
+      });
+    }
+  };
+
+  hadleListItemClick = event => {
+    const [currency] = event.target.innerText;
+
+    this.setState({
+      label: currency,
+      open: false,
+    });
   };
 
   render() {
-    const { data } = this.props;
-
-    console.log(data.currencies);
+    const buttonStyle = this.state.open
+      ? `${styles.button} ${styles['button--open']}`
+      : `${styles.button} ${styles['button--closed']}`;
 
     return (
-      <form>
-        <select
-          className={styles.select}
-          value={this.state.value}
-          onChange={this.handleChange}
+      <div className={styles.container} ref={this.container}>
+        <button
+          type="button"
+          className={buttonStyle}
+          onClick={this.handleButtonClick}
         >
-          {options.map(option => (
-            <option
-              className={styles.option}
-              value={option.value}
-              key={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </form>
+          {this.state.label}
+        </button>
+
+        {this.state.open && (
+          <div className={styles.dropdown}>
+            <ul>
+              {options.map(item => (
+                <li
+                  key={item.value}
+                  data={item.value}
+                  title={item.label}
+                  onClick={this.hadleListItemClick}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     );
   }
 }
