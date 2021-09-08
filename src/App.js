@@ -10,8 +10,6 @@ import Loader from './components/Loader';
 
 import './App.css';
 
-import routes from './routes';
-
 const Category = lazy(() =>
   import('./pages/Category' /* webpackChunkName: "category-page" */),
 );
@@ -32,21 +30,28 @@ class App extends Component {
   render() {
     const { data } = this.props;
 
+    // const all = data?.categories?.reduce((acc, item) => {
+    //   acc.push(...item.products);
+    //   return acc;
+    // }, []);
+
+    // console.log(all);
+
     return (
       <Container>
         <AppBar />
 
         <Suspense fallback={<Loader />}>
           <Switch>
-            <Route exact path={routes.home}>
-              {data.categories && (
+            {data.categories && (
+              <Route exact path="/">
                 <Category
                   category={data.categories[0]}
                   error={data.error}
                   loading={data.loading}
                 />
-              )}
-            </Route>
+              </Route>
+            )}
 
             {data.categories &&
               data.categories.map(category => {
@@ -61,19 +66,24 @@ class App extends Component {
                 );
               })}
 
-            <Route exact path={routes.clothesProducts}>
-              <Product />
-            </Route>
+            {data.categories &&
+              data.categories.map(category => {
+                return (
+                  <Route
+                    exact
+                    path={`/${category.name}/:productId`}
+                    key={category.name}
+                  >
+                    <Product />
+                  </Route>
+                );
+              })}
 
-            <Route exact path={routes.techProducts}>
-              <Product />
-            </Route>
-
-            <Route exact path={routes.cart}>
+            <Route exact path="/cart">
               <Cart />
             </Route>
 
-            <Route exact path={routes.checkout}>
+            <Route exact path="/checkout">
               <Checkout />
             </Route>
           </Switch>
