@@ -9,6 +9,5 @@
 
 .logo:hover,
 .logo:focus {
-  transform: rotate(180deg);
-  transition: transform 250ms linear;
+  transform: rotate(-180deg);
 }

@@ -6,6 +6,32 @@ import styles from './CartProduct.module.css';
 import { data } from '../../products.json';
 
 class CartProduct extends Component {
+  state = {
+    quantity: 1,
+  };
+
+  handleAttributes = () => {
+    alert('Selected');
+  };
+
+  increment = () => {
+    this.setState(state => {
+      return {
+        quantity: (state.quantity += 1),
+      };
+    });
+  };
+
+  decrement = () => {
+    this.setState(state => {
+      if (state.quantity > 1) {
+        return {
+          quantity: (state.quantity -= 1),
+        };
+      }
+    });
+  };
+
   render() {
     const products = data.categories[1].products;
 
@@ -20,7 +46,11 @@ class CartProduct extends Component {
                   ${product.prices[0].amount}
                 </p>
 
-                <button type="button" className={styles.product__attr}>
+                <button
+                  type="button"
+                  className={styles.product__attr}
+                  onClick={this.handleAttributes}
+                >
                   S
                 </button>
                 <button
@@ -36,15 +66,17 @@ class CartProduct extends Component {
                   <button
                     type="button"
                     className={styles.counters__button}
-                    onClick={() => alert('Increment')}
+                    onClick={this.increment}
                   >
                     +
                   </button>
-                  <span className={styles.counters__value}>1</span>
+                  <span className={styles.counters__value}>
+                    {this.state.quantity}
+                  </span>
                   <button
                     type="button"
                     className={styles.counters__button}
-                    onClick={() => alert('Decrement')}
+                    onClick={this.decrement}
                   >
                     -
                   </button>

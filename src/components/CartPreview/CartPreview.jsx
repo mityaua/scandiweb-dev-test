@@ -19,6 +19,7 @@ class CartPreview extends Component {
 
   state = {
     open: false,
+    quantity: 1,
   };
 
   componentDidMount() {
@@ -64,6 +65,28 @@ class CartPreview extends Component {
     }
   };
 
+  handleAttributes = () => {
+    alert('Selected');
+  };
+
+  increment = () => {
+    this.setState(state => {
+      return {
+        quantity: (state.quantity += 1),
+      };
+    });
+  };
+
+  decrement = () => {
+    this.setState(state => {
+      if (state.quantity > 1) {
+        return {
+          quantity: (state.quantity -= 1),
+        };
+      }
+    });
+  };
+
   render() {
     // Mock
     const products = data.categories[1].products;
@@ -101,12 +124,14 @@ class CartPreview extends Component {
                         <button
                           type="button"
                           className={`${styles.square__button} ${styles.attr__button}`}
+                          onClick={this.handleAttributes}
                         >
                           S
                         </button>
                         <button
                           type="button"
                           className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
+                          onClick={this.handleAttributes}
                         >
                           M
                         </button>
@@ -117,15 +142,17 @@ class CartPreview extends Component {
                       <button
                         type="button"
                         className={`${styles.square__button} ${styles.counters__up}`}
-                        onClick={() => alert('Increment')}
+                        onClick={this.increment}
                       >
                         +
                       </button>
-                      <span className={styles.counters__count}>1</span>
+                      <span className={styles.counters__count}>
+                        {this.state.quantity}
+                      </span>
                       <button
                         type="button"
                         className={`${styles.square__button} ${styles.counters__down}`}
-                        onClick={() => alert('Decrement')}
+                        onClick={this.decrement}
                       >
                         -
                       </button>
