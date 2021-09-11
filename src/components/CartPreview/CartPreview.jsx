@@ -1,7 +1,5 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 import { Link } from 'react-router-dom';
-
-import Modal from '../Modal';
 
 import styles from './CartPreview.module.css';
 
@@ -16,30 +14,63 @@ import { data } from '../../products.json';
 const body = document.querySelector('body');
 
 class CartPreview extends Component {
+  container = createRef();
+  backdrop = createRef();
+
   state = {
-    showModal: false,
+    open: false,
   };
 
-  toggleModal = () => {
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  handleCartClick = () => {
     if (body.classList.contains(styles.hidden)) {
       body.classList.remove(styles.hidden);
     } else {
       body.classList.add(styles.hidden);
     }
 
-    this.setState(state => ({
-      showModal: !state.showModal,
-    }));
+    this.setState(state => {
+      return {
+        open: !state.open,
+      };
+    });
+  };
+
+  handleClickOutside = event => {
+    if (
+      this.container.current &&
+      !this.container.current.contains(event.target)
+    ) {
+      this.setState({
+        open: false,
+      });
+
+      body.classList.remove(styles.hidden);
+    }
+  };
+
+  handleClickBackdrop = event => {
+    if (event.currentTarget === event.target) {
+      this.setState({
+        open: false,
+      });
+    }
   };
 
   render() {
-    const { showModal } = this.state;
     // Mock
     const products = data.categories[1].products;
 
     return (
-      <div className={styles.wrapper}>
-        <button className={styles.button} onClick={this.toggleModal}>
+      <div className={styles.wrapper} ref={this.container}>
+        <button className={styles.button} onClick={this.handleCartClick}>
           <CartImage className={styles.cart} title="My Bag" alt="My Bag" />
 
           {products.length > 0 ? (
@@ -47,102 +78,104 @@ class CartPreview extends Component {
           ) : null}
         </button>
 
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <p className={styles.title}>
-              <span className={styles.title__name}>My Bag</span>,{' '}
-              {products.length} items
-            </p>
+        {this.state.open && (
+          <div className={styles.backdrop} onClick={this.handleClickBackdrop}>
+            <div className={styles.modal}>
+              <p className={styles.title}>
+                <span className={styles.title__name}>My Bag</span>,{' '}
+                {products.length} items
+              </p>
 
-            {products.map(product => {
-              return (
-                <div className={styles.product__wrapper} key={product.id}>
-                  <div className={styles.product__content}>
-                    <p className={styles.product__name}>{product.name}</p>
-                    <p className={styles.product__price}>
-                      ${product.prices[0].amount}
-                    </p>
+              {products.map(product => {
+                return (
+                  <div className={styles.product__wrapper} key={product.id}>
+                    <div className={styles.product__content}>
+                      <p className={styles.product__name}>{product.name}</p>
+                      <p className={styles.product__price}>
+                        ${product.prices[0].amount}
+                      </p>
 
-                    {/* Mock */}
+                      {/* Mock */}
 
-                    <div>
+                      <div>
+                        <button
+                          type="button"
+                          className={`${styles.square__button} ${styles.attr__button}`}
+                        >
+                          S
+                        </button>
+                        <button
+                          type="button"
+                          className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
+                        >
+                          M
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={styles.counters}>
                       <button
                         type="button"
-                        className={`${styles.square__button} ${styles.attr__button}`}
+                        className={`${styles.square__button} ${styles.counters__up}`}
+                        onClick={() => alert('Increment')}
                       >
-                        S
+                        +
                       </button>
+                      <span className={styles.counters__count}>1</span>
                       <button
                         type="button"
-                        className={`${styles.square__button} ${styles.attr__button} ${styles['square__button--disabled']}`}
+                        className={`${styles.square__button} ${styles.counters__down}`}
+                        onClick={() => alert('Decrement')}
                       >
-                        M
+                        -
                       </button>
                     </div>
+
+                    <div className={styles.product__thumb}>
+                      <img
+                        src={product.gallery[0]}
+                        className={styles.product__image}
+                        alt=""
+                        width="105"
+                        height="137"
+                      />
+                    </div>
                   </div>
+                );
+              })}
 
-                  <div className={styles.counters}>
-                    <button
-                      type="button"
-                      className={`${styles.square__button} ${styles.counters__up}`}
-                      onClick={() => alert('Increment')}
-                    >
-                      +
-                    </button>
-                    <span className={styles.counters__count}>1</span>
-                    <button
-                      type="button"
-                      className={`${styles.square__button} ${styles.counters__down}`}
-                      onClick={() => alert('Decrement')}
-                    >
-                      -
-                    </button>
-                  </div>
+              <div className={styles.total}>
+                <span className={styles.total__text}>Total</span>
+                <span className={styles.total__price}>$100.00</span>
+              </div>
 
-                  <div className={styles.product__thumb}>
-                    <img
-                      src={product.gallery[0]}
-                      className={styles.product__image}
-                      alt=""
-                      width="105"
-                      height="137"
-                    />
-                  </div>
-                </div>
-              );
-            })}
+              <div className={styles.buttons}>
+                <Link
+                  to={routes.cart}
+                  className={`${styles.buttons__link} ${styles.buttons__view}`}
+                  onClick={this.handleCartClick}
+                >
+                  View bag
+                </Link>
 
-            <div className={styles.total}>
-              <span className={styles.total__text}>Total</span>
-              <span className={styles.total__price}>$100.00</span>
-            </div>
+                <Link
+                  to={routes.checkout}
+                  className={`${styles.buttons__link} ${styles.buttons__check}`}
+                  onClick={this.handleCartClick}
+                >
+                  Check out
+                </Link>
+              </div>
 
-            <div className={styles.buttons}>
-              <Link
-                to={routes.cart}
-                className={`${styles.buttons__link} ${styles.buttons__view}`}
-                onClick={this.toggleModal}
+              <button
+                type="button"
+                className={styles.close}
+                onClick={this.handleCartClick}
               >
-                View bag
-              </Link>
-
-              <Link
-                to={routes.checkout}
-                className={`${styles.buttons__link} ${styles.buttons__check}`}
-                onClick={this.toggleModal}
-              >
-                Check out
-              </Link>
+                <ArrowImage />
+              </button>
             </div>
-
-            <button
-              type="button"
-              className={styles.close}
-              onClick={this.toggleModal}
-            >
-              <ArrowImage />
-            </button>
-          </Modal>
+          </div>
         )}
       </div>
     );

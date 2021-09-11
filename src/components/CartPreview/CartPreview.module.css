@@ -28,6 +28,31 @@
   transition: opacity 250ms linear;
 }
 
+.backdrop {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 1;
+
+  width: 100vw;
+  height: calc(100vh - 80px);
+
+  background-color: rgba(57, 55, 72, 0.22);
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  right: 85px;
+  max-height: 550px;
+  max-width: 325px;
+  width: 100%;
+  padding: 9px 16px 20px 16px;
+  overflow-y: auto;
+
+  background-color: #fff;
+}
+
 /* Cart item counter */
 .counter {
   position: absolute;
@@ -123,7 +148,7 @@
   opacity: 0.6;
   background-color: rgba(166, 166, 166, 0.2);
 
-  cursor: default;
+  pointer-events: none;
 }
 
 .counters__up {
