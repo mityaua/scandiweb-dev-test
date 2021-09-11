@@ -69,6 +69,7 @@ class SingleProduct extends Component {
 
         <aside className={styles.sidebar}>
           <h1 className={styles.title}>{product.name}</h1>
+          <h2 className={styles.brand}>{product.brand}</h2>
 
           {product.attributes.length
             ? product.attributes.map(attributes => {
