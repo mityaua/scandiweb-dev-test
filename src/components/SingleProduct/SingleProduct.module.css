@@ -145,7 +145,7 @@
   background-color: #292929;
 
   opacity: 0.5;
-  cursor: auto;
+  pointer-events: none;
 }
 
 .description {

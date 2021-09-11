@@ -7,7 +7,7 @@ import styles from './Category.module.css';
 
 class Category extends Component {
   componentDidMount() {
-    document.title = 'Clothes | Scandiweb Dev Test';
+    document.title = 'Category | Scandiweb Dev Test';
   }
 
   render() {
