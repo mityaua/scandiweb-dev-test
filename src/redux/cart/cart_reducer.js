@@ -12,7 +12,7 @@ const initial = {
 };
 
 const products = createReducer(initial.products, {
-  [addProductSuccess]: (_, { payload }) => payload,
+  [addProductSuccess]: (state, { payload }) => [...state, payload],
 });
 
 const error = createReducer(false, {

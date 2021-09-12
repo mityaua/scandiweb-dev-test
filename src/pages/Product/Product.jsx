@@ -10,7 +10,7 @@ import styles from './Product.module.css';
 
 class Product extends Component {
   componentDidMount() {
-    document.title = 'Product example | Scandiweb Dev Test';
+    document.title = 'Product | Scandiweb Dev Test';
   }
 
   render() {

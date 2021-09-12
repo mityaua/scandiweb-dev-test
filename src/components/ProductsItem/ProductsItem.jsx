@@ -9,8 +9,8 @@ import styles from './ProductsItem.module.css';
 import { ReactComponent as EmpryCart } from '../../images/empty-cart.svg';
 
 class ProductsItem extends Component {
-  addToCart = () => {
-    this.props.dispatchToCart();
+  addToCart = product => {
+    this.props.dispatchToCart(product);
 
     alert('Added to cart');
   };
@@ -60,7 +60,7 @@ class ProductsItem extends Component {
           <button
             type="button"
             className={styles.item__cart}
-            onClick={this.addToCart}
+            onClick={() => this.addToCart(product)}
             title="Add to cart"
             alt="Add to cart"
           >
@@ -73,7 +73,7 @@ class ProductsItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchToCart: () => dispatch(addProductSuccess()),
+  dispatchToCart: product => dispatch(addProductSuccess(product)),
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(ProductsItem));

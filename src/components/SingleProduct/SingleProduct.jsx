@@ -16,8 +16,8 @@ class SingleProduct extends Component {
     this.setState({ cover: this.props.product.gallery[0] });
   }
 
-  addToCart = () => {
-    this.props.dispatchToCart();
+  addToCart = product => {
+    this.props.dispatchToCart(product);
 
     alert('Added to cart');
   };
@@ -109,7 +109,7 @@ class SingleProduct extends Component {
           <button
             type="button"
             className={styles.add}
-            onClick={this.addToCart}
+            onClick={() => this.addToCart(product)}
             disabled={!product.inStock}
           >
             {product.inStock ? 'add to cart' : 'Out of stock'}
@@ -123,7 +123,7 @@ class SingleProduct extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchToCart: () => dispatch(addProductSuccess()),
+  dispatchToCart: product => dispatch(addProductSuccess(product)),
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(SingleProduct));
