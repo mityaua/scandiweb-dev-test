@@ -1,5 +1,8 @@
 import { Component, createRef } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { getProducts, getTotalPrice } from '../../redux/cart/cart_selector';
 
 import styles from './CartPreview.module.css';
 
@@ -7,9 +10,6 @@ import { ReactComponent as CartImage } from '../../images/cart.svg';
 import { ReactComponent as ArrowImage } from '../../images/arrow-up.svg';
 
 import routes from '../../routes';
-
-// Mock
-import { data } from '../../products.json';
 
 const body = document.querySelector('body');
 
@@ -88,16 +88,23 @@ class CartPreview extends Component {
   };
 
   render() {
-    // Mock
-    const products = data.categories[1].products;
+    const products = this.props.products;
+    const totalPrice = this.props.total;
 
     return (
       <div className={styles.wrapper} ref={this.container}>
-        <button className={styles.button} onClick={this.handleCartClick}>
-          <CartImage className={styles.cart} title="My Bag" alt="My Bag" />
+        <button
+          className={styles.button}
+          onClick={this.props.products.length ? this.handleCartClick : null}
+        >
+          <CartImage
+            className={styles.cart}
+            title={this.props.products.length ? 'My bag' : 'Card is empty'}
+            alt={this.props.products.length ? 'My bag' : 'Card is empty'}
+          />
 
-          {products.length > 0 ? (
-            <span className={styles.counter}>{products.length}</span>
+          {this.props.products.length ? (
+            <span className={styles.counter}>{this.props.products.length}</span>
           ) : null}
         </button>
 
@@ -173,7 +180,9 @@ class CartPreview extends Component {
 
               <div className={styles.total}>
                 <span className={styles.total__text}>Total</span>
-                <span className={styles.total__price}>$100.00</span>
+                <span className={styles.total__price}>
+                  ${totalPrice.toFixed(2)}
+                </span>
               </div>
 
               <div className={styles.buttons}>
@@ -209,4 +218,9 @@ class CartPreview extends Component {
   }
 }
 
-export default CartPreview;
+const mapStateToProps = state => ({
+  products: getProducts(state),
+  total: getTotalPrice(state),
+});
+
+export default connect(mapStateToProps, null)(CartPreview);

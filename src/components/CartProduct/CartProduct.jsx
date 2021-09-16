@@ -1,9 +1,9 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getProducts } from '../../redux/cart/cart_selector';
 
 import styles from './CartProduct.module.css';
-
-// Mock
-import { data } from '../../products.json';
 
 class CartProduct extends Component {
   state = {
@@ -33,7 +33,7 @@ class CartProduct extends Component {
   };
 
   render() {
-    const products = data.categories[1].products;
+    const products = this.props.products;
 
     return (
       <ul>
@@ -42,6 +42,7 @@ class CartProduct extends Component {
             <li className={styles.item} key={product.id}>
               <div className={styles.product}>
                 <p className={styles.product__name}>{product.name}</p>
+                <p className={styles.product__brand}>{product.brand}</p>
                 <p className={styles.product__price}>
                   ${product.prices[0].amount}
                 </p>
@@ -101,4 +102,8 @@ class CartProduct extends Component {
   }
 }
 
-export default CartProduct;
+const mapStateToProps = state => ({
+  products: getProducts(state),
+});
+
+export default connect(mapStateToProps, null)(CartProduct);
